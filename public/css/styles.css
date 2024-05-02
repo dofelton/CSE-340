@@ -8,3 +8,72 @@
 body {
   background-image: url("images/site/checkerboard.jpg");
 }
+
+.home {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.hero {
+  position: relative;
+  border: 1px solid black;
+  width: 80%;
+}
+
+.hero img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+
+}
+
+#features {
+  position: absolute;
+  border: 1px solid black;
+  padding: 10px;
+  align-content: center;
+  top: 70px;
+  left: 10px;
+  background: rgb(240, 240, 240, 0.7);
+}
+
+.upgrades {
+  border: 1px solid black;
+  flex-wrap: wrap;
+  
+  width: 50%;
+}
+
+.upgrades figure {
+  width: 30%;
+  flex-direction: row;
+}
+
+.reviews {
+  border: 1px solid black;
+  font-size: large;
+  padding: 10px;
+  width: 50%;
+}
+
+.reviews li {
+  padding-top: 5px;
+}
+
+figure {
+  align-items: center;
+  width: 50%;
+}
+
+figure img {
+  border: 1px solid black;
+  background: yellow;
+  padding: 10px;
+}
+
+#content {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+}
