@@ -41,11 +41,12 @@ nav {
   color: white;
   justify-content: space-around;
 }
+
 nav ul {
   display: flex;
   flex-direction: row;
-
 }
+
 nav ul li {
   display: flex;
   flex-direction: row;
@@ -53,8 +54,6 @@ nav ul li {
   text-decoration: none;
   padding: .5rem;
 }
-
-
 
 .home {
   display: flex;
@@ -86,7 +85,6 @@ nav ul li {
   display: grid;
   grid-template-columns: 1fr 1fr;
   border: 1px solid black;
-  flex-wrap: wrap;
   padding: 20px;
   width: 50%;
 }
@@ -98,17 +96,6 @@ nav ul li {
   justify-content: center;
 }
 
-.reviews {
-  border: 1px solid black;
-  font-size: large;
-  padding: 10px;
-  width: 50%;
-}
-
-.reviews li {
-  padding-top: 5px;
-}
-
 .upgrades div {
   align-items: center;
   width: 50%;
@@ -118,6 +105,17 @@ nav ul li {
   border: 1px solid black;
   background: yellow;
   padding: .5rem;
+}
+
+.reviews {
+  border: 1px solid black;
+  font-size: large;
+  padding: 10px;
+  width: 50%;
+}
+
+.reviews li {
+  padding-top: 5px;
 }
 
 #content {
