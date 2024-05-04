@@ -5,6 +5,35 @@
   box-sizing: border-box;
 }
 
+body {
+  background-image: url("/public/images/site/checkerboard.jpg");
+  display: flex;
+  justify-content: center;
+}
+
+#wrapper {
+  width: 90%;
+  border: 1px solid blue;
+  background: white;
+}
+
+#top-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: white;
+}
+
+.siteName {
+  font-size: xx-large;
+  padding: 10px;
+}
+
+#tools {
+    font-size: x-large;
+  padding: 10px;
+}
+
 nav {
   display: flex;
   flex-direction: row;
@@ -25,9 +54,7 @@ nav ul li {
   padding: 10px;
 }
 
-body {
-  background-image: url("images/site/checkerboard.jpg");
-}
+
 
 .home {
   display: flex;
