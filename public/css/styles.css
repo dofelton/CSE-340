@@ -13,7 +13,7 @@ body {
 
 #wrapper {
   width: 90%;
-  border: 1px solid blue;
+  border: 2px solid yellow;
   background: white;
 }
 
@@ -72,7 +72,7 @@ nav ul li {
   height: auto;
 }
 
-.hero div {
+#features {
   position: absolute;
   border: 1px solid black;
   padding: 10px;
@@ -137,4 +137,19 @@ nav ul li {
 .reviews {
   width: 100%;
 }
+
+#wrapper {
+  width: 100%;
+}  
+
+.hero {
+  position: relative;
+  border: 1px solid black;
+  width: 100%;
+}
+
+#content {
+  width: 100%;
+}
+
 }
