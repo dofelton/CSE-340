@@ -5,6 +5,14 @@
   box-sizing: border-box;
 }
 
+nav {
+  display: flex;
+  flex-direction: row;
+  align-content: space-around;
+  background: black;
+  color: white;
+}
+
 body {
   background-image: url("images/site/checkerboard.jpg");
 }
@@ -32,22 +40,29 @@ body {
   position: absolute;
   border: 1px solid black;
   padding: 10px;
-  align-content: center;
-  top: 70px;
+  top: 150px;
   left: 10px;
   background: rgb(240, 240, 240, 0.7);
 }
 
 .upgrades {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   border: 1px solid black;
   flex-wrap: wrap;
-  
+  padding: 20px;
   width: 50%;
 }
 
-.upgrades figure {
-  width: 30%;
-  flex-direction: row;
+upgrades h3 {
+  width: 100%;
+  grid-column: 1/ span 2;
+  ;
+}
+
+.upgrades div {
+  width: 50%;
+  margin-top: 10px;
 }
 
 .reviews {
@@ -66,7 +81,8 @@ figure {
   width: 50%;
 }
 
-figure img {
+.upgrades img {
+  
   border: 1px solid black;
   background: yellow;
   padding: 10px;
