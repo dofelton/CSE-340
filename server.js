@@ -26,7 +26,7 @@ app.set("layout", "./layouts/layout")
  *************************/
 app.use(static)
 // index route
-app.get("/", baseController.buildHome)
+app.get("/", utilities.handleErrors(baseController.buildHome))
 // Inventory routes
 app.use("/inv", inventoryRoute)
 // File Not Found Route - last route in list
