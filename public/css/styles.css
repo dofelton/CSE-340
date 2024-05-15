@@ -5,6 +5,13 @@
   box-sizing: border-box;
 }
 
+:root {
+  --text: #008bee;
+  --background: #eee;
+  --border: rgb(113, 112, 112)
+
+}
+
 body {
   background-image: url("/images/site/checkerboard.jpg");
   display: flex;
@@ -152,4 +159,45 @@ nav ul li {
   width: 100%;
 }
 
+fieldset {
+  margin: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: .5rem 2%
+}
+
+label {
+  display: block;
+  padding-top: 1rem;
+  font-size: .9rem;
+}
+
+input[type="password"],
+input[type="email"]{
+  display: block;
+  border: solid 1px var(--border);
+  border-radius: 6px;
+  background-color: var(--background);
+  padding: .75rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+input[type=submit] {
+  background-image: linear-gradient(blue, rgb(119, 119, 244));
+  color: white;
+  border-radius: 6px;
+  padding: .8rem;
+  width: 96%;
+  max-width: 400px;
+  margin: -1 rem 2% 2rem 2%;
+}
+
+input:required {
+  border-right: solid 8px red;
+}
+
+input:required:valid {
+  border-right: solid 8px green;
+}
 }

@@ -1,9 +1,14 @@
 // Needed Resources 
 const express = require("express")
 const router = new express.Router() 
-const accountsController = require("../utilities/index")
+const accountController = require("../controllers/accountController")
 
-// Route to Login View
-// router.get("/type/:login", accountController.);
+// Route to build login view
+router.get("/login", utilities.handleErrors(accountController.buildLogin))
 
+// Route to build registration view
+router.get("/register", utilities.handleErrors(accountController.buildRegister))
+
+// Route for registration submission
+router.post('/register', utilities.handleErrors(accountController.registerAccount))
 module.exports = router;

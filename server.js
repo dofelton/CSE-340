@@ -16,6 +16,7 @@ const utilities = require("./utilities/")
 const session = require("express-session")
 const pool = require('./database/')
 const accountRoute = require("./routes/accountRoute")
+const bodyParser = require("body-parser")
 
 /* *********************
  * Middleware
@@ -38,6 +39,9 @@ app.use(function(req, res, next){
   next()
 })
 
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ exttended: true }))
+
 /* ***********************
  * View Engine and Templates
  *************************/
@@ -57,6 +61,8 @@ app.use("/inv", inventoryRoute)
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
 })
+// Account routes
+app.use("/account", require("./routes/accountRoute"))
 
 /* ***********************
 * Express Error Handler
