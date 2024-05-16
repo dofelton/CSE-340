@@ -4,27 +4,27 @@
   "description": "Starter project for CSE 340",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+      "start": "node server.js",
+      "dev": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.20.2",
-    "connect-flash": "^0.1.1",
-    "connect-pg-simple": "^9.0.1",
-    "dotenv": "^16.0.3",
-    "ejs": "^3.1.10",
-    "express": "^4.19.2",
-    "express-ejs-layouts": "^2.5.1",
-    "express-messages": "^1.0.1",
-    "express-session": "^1.18.0",
-    "pg": "^8.8.0",
-    "pnpm": "^9.1.0",
-    "utilities": "link:..\\utilities"
+      "body-parser": "^1.20.2",
+      "connect-flash": "^0.1.1",
+      "connect-pg-simple": "^9.0.1",
+      "dotenv": "^16.0.3",
+      "ejs": "^3.1.10",
+      "express": "^4.19.2",
+      "express-ejs-layouts": "^2.5.1",
+      "express-messages": "^1.0.1",
+      "express-session": "^1.18.0",
+      "pg": "^8.8.0",
+      "pnpm": "^9.1.0",
+      "utilities": "link:..\\utilities"
   },
   "devDependencies": {
-    "nodemon": "^3.1.0"
+      "nodemon": "^3.1.0"
   },
   "packageManager": "pnpm@9.1.0+sha256.22e36fba7f4880ecf749a5ca128b8435da085ecd49575e7fb9e64d6bf4fad394"
 }
