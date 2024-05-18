@@ -13,24 +13,24 @@ const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
 const utilities = require("./utilities/")
-// const session = require("express-session")
-// const pool = require('./database/')
+const session = require("express-session")
+const pool = require('./database/')
 // const accountRoute = require("./routes/accountRoute")
 // const bodyParser = require("body-parser")
 
-// /* *********************
-//  * Middleware
-//  * ********************** */
-// app.use(session({
-//   store: new (require('connect-pg-simple')(session))({
-//     createTableIfMissing: true,
-//     pool,
-//   }),
-//   secret: process.env.SESSION_SECRET,
-//   RESAVE: true,
-//   saveUninitialized: true,
-//   name: 'sesionId',
-// }))
+/* ***********************
+ * Middleware
+ * ************************/
+app.use(session({
+  store: new (require('connect-pg-simple')(session))({
+    createTableIfMissing: true,
+    pool,
+  }),
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  name: 'sessionId',
+}))
 
 // // Express Messages Middleware
 // app.use(require('connect-flash')())
@@ -54,30 +54,30 @@ app.set("layout", "./layouts/layout")
  *************************/
 app.use(static)
 // index route
-app.get("/", baseController.buildHome)
+app.get("/", utilities.handleErrors(baseController.buildHome))
 // Inventory routes
 app.use("/inv", inventoryRoute)
 // // File Not Found Route - last route in list
-// app.use(async (req, res, next) => {
-//   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
-// })
 // // Account routes
 // app.use("/account", require("./routes/accountRoute"))
+app.use(async (req, res, next) => {
+  next({status: 404, message: 'Sorry, we appear to have lost that page.'})
+})
 
-// /* ***********************
-// * Express Error Handler
-// * Place after all other middleware
-// *************************/
-// app.use(async (err, req, res, next) => {
-//   let nav = await utilities.getNav()
-//   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
-//   if(err.status == 404){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
-//   res.render("errors/error", {
-//     title: err.status || 'Server Error',
-//     message,
-//     nav
-//   })
-// })
+/* ***********************
+* Express Error Handler
+* Place after all other middleware
+*************************/
+app.use(async (err, req, res, next) => {
+  let nav = await utilities.getNav()
+  console.error(`Error at: "${req.originalUrl}": ${err.message}`)
+  if(err.status == 404){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
+  res.render("errors/error", {
+    title: err.status || 'Server Error',
+    message,
+    nav
+  })
+})
 
 /* ***********************
  * Local Server Information
