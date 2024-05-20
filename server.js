@@ -15,8 +15,8 @@ const inventoryRoute = require("./routes/inventoryRoute")
 const utilities = require("./utilities/")
 const session = require("express-session")
 const pool = require('./database/')
-// const accountRoute = require("./routes/accountRoute")
-// const bodyParser = require("body-parser")
+const accountRoute = require("./routes/accountRoute")
+const bodyParser = require("body-parser")
 
 /* ***********************
  * Middleware
@@ -32,15 +32,15 @@ app.use(session({
   name: 'sessionId',
 }))
 
-// // Express Messages Middleware
-// app.use(require('connect-flash')())
-// app.use(function(req, res, next){
-//   res.locals.messages = require('express-messages')(req, res)
-//   next()
-// })
+// Express Messages Middleware
+app.use(require('connect-flash')())
+app.use(function(req, res, next){
+  res.locals.messages = require('express-messages')(req, res)
+  next()
+})
 
-// app.use(bodyParser.json())
-// app.use(bodyParser.urlencoded({ exttended: true }))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ exttended: true }))
 
 /* ***********************
  * View Engine and Templates
@@ -53,13 +53,20 @@ app.set("layout", "./layouts/layout")
  * Routes
  *************************/
 app.use(static)
+
 // index route
 app.get("/", utilities.handleErrors(baseController.buildHome))
+
 // Inventory routes
 app.use("/inv", inventoryRoute)
-// // File Not Found Route - last route in list
-// // Account routes
-// app.use("/account", require("./routes/accountRoute"))
+
+// Individual Item route
+app.use("/inv", individualItemRoute)
+
+// Account routes
+app.use("/account", require("./routes/accountRoute"))
+
+// File Not Found Route - last route in list
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
 })
