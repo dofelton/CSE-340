@@ -8,15 +8,18 @@
 const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
-const app = express()
-const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
-const inventoryRoute = require("./routes/inventoryRoute")
 const utilities = require("./utilities/")
 const session = require("express-session")
 const pool = require('./database/')
-const accountRoute = require("./routes/accountRoute")
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
+const inventoryRoute = require("./routes/inventoryRoute")
+// ??? not needed anymore??? const static = require("./routes/static")   
+const accountRoute = require("./routes/accountRoute")
+
+const app = express()
+
 
 /* ***********************
  * Middleware
@@ -41,6 +44,7 @@ app.use(function(req, res, next){
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ exttended: true }))
+app.use(cookieParser())
 
 /* ***********************
  * View Engine and Templates
@@ -52,15 +56,16 @@ app.set("layout", "./layouts/layout")
 /* ***********************
  * Routes
  *************************/
-app.use(static)
+// app.use(static)
+
 // index route
 app.get("/", utilities.handleErrors(baseController.buildHome))
+
 // Inventory routes
 app.use("/inv", inventoryRoute)
+// // File Not Found Route - last route in list
 // // Account routes
-app.use("/account", require("./routes/accountRoute"))
-
-// File Not Found Route - last route in list
+// app.use("/account", require("./routes/accountRoute"))
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
 })

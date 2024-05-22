@@ -1,4 +1,6 @@
 const invModel = require("../models/inventory-model")
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 const Util = {}
 
 /* ************************
@@ -55,6 +57,29 @@ Util.buildClassificationGrid = async function(data){
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
   }
   return grid
+}
+
+/* ****************************************
+ * Build Individual Item HTML
+ ******************************************/
+
+Util.buildIndividualItem = async function(data){
+  let item
+  if (data.length > 0){
+    item = '<meta title="'+ vehicle.inv_make + ' '+ vehicle.inv_model + '/>'
+    item += '<ul id="item-display">'
+    item += '<li>'
+    item += '<img src="' + vehicle.inv_image
+    +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model
+    +' on CSE Motors" />'
+    item += '<h2>'+ vehicle.inv_year + ' ' + vehicle.inv_make + ' '+ vehicle.inv_model + '</h2>'
+    item += '<h3>Our Low Price $'+ new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</h3>'
+    item += '<div class"details">'
+    item += '<p>Description: '+ vehicle.inv_description + '</p>'
+    item += '<p>Milage: '+ new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + '</p>'
+    item += '<p>Color: ' + vehicle.inv_color + '</p>'
+  }
+  return item
 }
 
 /* ****************************************
