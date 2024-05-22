@@ -25,7 +25,13 @@ async function checkExistingEmail(account_email){
     }
 }
 
-/* **************************************
+/* ************************************
  * Return account data using
+ **************************************/
+async function getAccountByEmail (account_email) {
+    try {
+        const result = await pool.query()
+    }
+}
 
 module.exports = { registerAccount, checkExistingEmail }
