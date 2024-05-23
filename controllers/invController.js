@@ -35,4 +35,18 @@ invCont.buildByIndividual = async function (req, res, next) {
   })
 }
 
+/* ***************************
+ * Build vehicle management view
+ *****************************/
+invCont.buildManagementView = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const classificationSelect = await utilities.buildClassificationList()
+  res.render("./inventory/management", {
+    title: "Vehicle Management",
+    nav,
+    errors: null,
+    classificationSelect,
+  })
+}
+
 module.exports = invCont
