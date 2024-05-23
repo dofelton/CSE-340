@@ -13,9 +13,9 @@ const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
 const accountRoute = require("./routes/accountRoute")
-const utilities = require("./utilities/")
+const utilities = require("./utilities")
 const session = require("express-session")
-const pool = require('./database/')
+const pool = require('./database')
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
 
@@ -57,10 +57,14 @@ app.use(utilities.checkJWTToken)
 /* ***********************
  * Routes
  *************************/
-// app.use(static)
+app.use(static)
 
-// index route
-app.get("/", utilities.handleErrors(baseController.buildHome))
+// index route week 1
+app.get("/", function(req, res){
+  res.render("index", {title: "Home"})
+})
+// index route week 3 or 4
+// app.get("/", utilities.handleErrors(baseController.buildHome))
 
 // Inventory routes
 app.use("/inv", inventoryRoute)
