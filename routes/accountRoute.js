@@ -8,21 +8,21 @@ const regValidate = require('../utilities/account-validation')
 // Route to build login view
 router.get("/login", utilities.handleErrors(accountController.buildLogin))
 
-// Process the login attempt beginging week 4
-router.post(
-    "/login",
-    (req, res) => {
-        res.status(200).send('login process')
-    }
-)
-
-// Route to login process
+// Process the login attempt week 3
 // router.post(
 //     "/login",
-//     regValidate.loginRules(),
-//     regValidate.checkLoginData,
-//     utilities.handleErrors(accountController.accountLogin)
+//     (req, res) => {
+//         res.status(200).send('login process')
+//     }
 // )
+
+// Route to login process week 4
+router.post(
+    "/login",
+    regValidate.loginRules(),
+    regValidate.checkLoginData,
+    utilities.handleErrors(accountController.accountLogin)
+)
 
 // Route to build registration view
 router.get("/register", utilities.handleErrors(accountController.buildRegister))
