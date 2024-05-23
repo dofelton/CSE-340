@@ -8,18 +8,23 @@
 const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
+const app = express()
+const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
+const inventoryRoute = require("./routes/inventoryRoute")
+const accountRoute = require("./routes/accountRoute")
 const utilities = require("./utilities/")
 const session = require("express-session")
 const pool = require('./database/')
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
-const inventoryRoute = require("./routes/inventoryRoute")
-// ??? not needed anymore??? const static = require("./routes/static")   
-const accountRoute = require("./routes/accountRoute")
 
-const app = express()
-
+/* ***********************
+ * View Engine and Templates
+ *************************/
+app.set("view engine", "ejs")
+app.use(expressLayouts)
+app.set("layout", "./layouts/layout")
 
 /* ***********************
  * Middleware
@@ -46,12 +51,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ exttended: true }))
 app.use(cookieParser())
 
-/* ***********************
- * View Engine and Templates
- *************************/
-app.set("view engine", "ejs")
-app.use(expressLayouts)
-app.set("layout", "./layouts/layout")
+
 
 /* ***********************
  * Routes
