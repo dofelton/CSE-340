@@ -20,22 +20,23 @@ async function getInventoryByClassificationId(classification_id) {
       WHERE i.classification_id = $1`,
       [classification_id]
     )
+    console.log(`classification data: ${data.rows}`)
     return data.rows
   } catch (error) {
     console.error("getclassificationsbyid error " + error)
   }
 }
 
-async function getInventoryDetailsByInvId(inv_id) {
+async function getInventoryDetailsByInvId(inventoryId) {
   try {
-    console.log(`invid is ${inv_id}`)
+    console.log(`inventoryid is ${inventoryId}`)
     const data = await pool.query(
       `SELECT * FROM public.inventory 
       WHERE inv_id = $1`,
-      [inv_id]
+      [inventoryId]
     )
-    console.log(`1. data ${data.rows[0]}`)
-    return data.rows[0]
+    console.log(`Model data: ${data.rows}`)
+    return data.rows
   } catch (error) {
     console.error("getclassificationsbyid error " + error)
   }

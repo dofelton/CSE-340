@@ -65,22 +65,23 @@ Util.buildClassificationGrid = async function(data){
  ******************************************/
 
 Util.buildIndividualItem = async function(data){
-  console.log(`3. data is ${data.rows}`)
+  console.log(`Build data is ${data}`)
   let item
-  if (data.length > 0){
+  // if (data.length > 0)
+    {
     item = '<ul id="detail-display">'
-    item = '<meta title="'+ vehicle.inv_make + ' '+ vehicle.inv_model + '/>'
+    item = '<meta title="'+ data.inv_make + ' '+ data.inv_model + '/>'
     item += '<ul id="item-display">'
     item += '<li>'
-    item += '<img src="' + vehicle.inv_image
-    +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model
+    item += '<img src="' + data.inv_image
+    +'" alt="Image of '+ data.inv_make + ' ' + data.inv_model
     +' on CSE Motors" />'
-    item += '<h2>'+ vehicle.inv_year + ' ' + vehicle.inv_make + ' '+ vehicle.inv_model + '</h2>'
-    item += '<h3>Our Low Price $'+ new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</h3>'
+    item += '<h2>'+ data.inv_year + ' ' + data.inv_make + ' '+ data.inv_model + '</h2>'
+    item += '<h3>Our Low Price $'+ new Intl.NumberFormat('en-US').format(data.inv_price) + '</h3>'
     item += '<div class"details">'
-    item += '<p>Description: '+ vehicle.inv_description + '</p>'
-    item += '<p>Milage: '+ new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + '</p>'
-    item += '<p>Color: ' + vehicle.inv_color + '</p>'
+    item += '<p>Description: '+ data.inv_description + '</p>'
+    item += '<p>Milage: '+ new Intl.NumberFormat('en-US').format(data.inv_miles) + '</p>'
+    item += '<p>Color: ' + data.inv_color + '</p>'
   }
   return item
 }

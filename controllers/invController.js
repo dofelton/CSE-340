@@ -24,17 +24,29 @@ invCont.buildByClassificationId = async function (req, res, next) {
  * ************************** */
 invCont.buildByIndividual = async function (req, res, next) {
   const inventory_id = req.params.inventoryId;
-  console.log(`This is inventory id ${inventory_id}`);
-  const data = await invModel.getInventoryDetailsByInvId(inv_id);
+  const data = await invModel.getInventoryDetailsByInvId(inventory_id);
+  console.log(`Control data = ${data.rows}`)
   const item = await utilities.buildIndividualItem(data[0]);
   let nav = await utilities.getNav();
-  console.log(`2. data ${data}`);
   const className = data[0].inv_model;
+  console.log(`className = ${className}`);
   res.render("./inventory/detail", {
     title: className,
     nav,
     item,
     errors: null,
+  })
+}
+
+/* Build Error view for intentional error process */
+invCont.buildErrorView = async function (req, res, next) {//err, 
+  let nav = await utilities.getNav()
+  const message = 'Error status 500: Something is broken! Try again.'
+  res.render("errors/error", {
+    title: Error || 'Server Error',  // err.status
+    message,
+    nav,
+    errors:null,
   })
 }
 
