@@ -53,6 +53,9 @@ importers:
       pg:
         specifier: ^8.8.0
         version: 8.11.5
+      pg-pool:
+        specifier: ^3.6.2
+        version: 3.6.2(pg@8.11.5)
       pnpm:
         specifier: ^9.1.0
         version: 9.1.0

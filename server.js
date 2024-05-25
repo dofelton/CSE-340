@@ -60,11 +60,11 @@ app.use(utilities.checkJWTToken)
 app.use(static)
 
 // index route week 1
-app.get("/", function(req, res){
-  res.render("index", {title: "Home"})
-})
+// app.get("/", function(req, res){
+//   res.render("index", {title: "Home"})
+// })
 // index route week 3 or 4
-// app.get("/", utilities.handleErrors(baseController.buildHome))
+app.get("/", utilities.handleErrors(baseController.buildHome))
 
 // Inventory routes
 app.use("/inv", inventoryRoute)
