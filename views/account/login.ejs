@@ -4,7 +4,7 @@
         res.redirect('/')
     } %>
 
-<%- message %>
+<%- messages() %>
 
 <form id="loginForm" action="/account/login" method="post">
     <fieldset>
@@ -12,6 +12,6 @@
         <div><p>There must be at least 12 characters, one must be a number, one must be a lowercase letter, one must be a capital, adn one must be a non-alphanumeric character</p></div>
         <label>Password: <input type="password" id="password" name="account_password" required pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12.}$"></label>
         <input type="submit" value="Login">
-        <a href="register.ejs">No account? Sign-up</a>
+        <a href="/account/register">No account? Sign-up</a>
     </fieldset>
 </form>

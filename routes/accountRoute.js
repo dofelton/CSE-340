@@ -8,7 +8,7 @@ const regValidate = require('../utilities/account-validation')
 // Route to build login view
 router.get("/login", utilities.handleErrors(accountController.buildLogin))
 
-// Process the login attempt week 3
+// Process the login attempt
 // router.post(
 //     "/login",
 //     (req, res) => {

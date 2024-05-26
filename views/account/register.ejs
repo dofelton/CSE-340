@@ -4,10 +4,10 @@
         res.redirect('/')
 } %>
 
-<%- message %>
+<%- messages() %>
 
 
-<form id="signinForm" action="./account/register" method="post">
+<form id="signinForm" action="/account/register" method="post">
     <fieldset>
         <legend>Register</legend>
         <label>First name<input type="text" id="accountFirstname" name="account_firstname" required value="<%= locals.account_firstname %>"></label>
