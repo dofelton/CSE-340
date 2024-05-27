@@ -54,14 +54,23 @@ invCont.buildErrorView = async function (req, res, next) {//err,
  * Build vehicle management view
  *****************************/
 invCont.buildManagementView = async function (req, res, next) {
+  console.log("We got this far")
   let nav = await utilities.getNav()
-  const classificationSelect = await utilities.buildClassificationList()
+  // const classificationSelect = await utilities.buildClassificationList()
   res.render("./inventory/management", {
     title: "Vehicle Management",
     nav,
     errors: null,
-    classificationSelect,
+    // classificationSelect,
   })
 }
 
+invCont.buildAddClassification = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/add-classification", {
+    title: "Add Classification",
+    nav,
+    errors: null,
+  })
+}
 module.exports = invCont

@@ -4,10 +4,11 @@
         res.redirect('/')
     } %>
 
-<%- message %>
+<%- messages() %>
 
-<form id="add-classification" action="add-classification.ejs" method="post">
+<form id="add-classification" action="/inventory/add-classification" method="post">
     <fieldset>
-        <label>Classification Name: <input type="text" id="addClassification" name="inv_classification" title="Names cannot contain a space or special character." pattern="[A-Za-z]+"</label>
+        <label>Classification Name: <input type="text" id="addClassification" name="classification_name" title="Names cannot contain a space or special character." pattern="[A-Za-z]+"</label>
+        <input type="submit" value="Add Entry">
     </fieldset>
 </form>

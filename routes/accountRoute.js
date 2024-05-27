@@ -27,12 +27,15 @@ router.post(
 // Route to build registration view
 router.get("/register", utilities.handleErrors(accountController.buildRegister))
 
+// Route to process registration begining of week 4
+router.post('/register', utilities.handleErrors(accountController.registerAccount))
+
 // Route for registration submission
-router.post(
-    "/register",
-    regValidate.registrationRules(),
-    regValidate.checkRegData,
-    utilities.handleErrors(accountController.registerAccount))
+// router.post(
+//     "/register",
+//     regValidate.registrationRules(),
+//     regValidate.checkRegData,
+//     utilities.handleErrors(accountController.registerAccount))
 
 // default "/" route
 router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildManagement))

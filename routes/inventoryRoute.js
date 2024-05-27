@@ -13,4 +13,10 @@ router.get("/detail/:inventoryId", utilities.handleErrors(invController.buildByI
 // Router for intentional error
 router.get("/error", utilities.handleErrors(invController.buildErrorView))
 
+// Router for management view
+router.get("/", utilities.handleErrors(invController.buildManagementView))
+
+// Router for add classification view
+router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification))
+
 module.exports = router;
