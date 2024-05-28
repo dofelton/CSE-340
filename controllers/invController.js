@@ -78,11 +78,17 @@ invCont.buildAddClassification = async function (req, res, next) {
   })
   const addResult = await invModel.addClassification(classification_name)
 if (regResult) {
+  console.log('Added Successfully')
     req.flash(
         "notice",
         `Congratulations, you\'ve added ${classification_name}.`
     )
+    res.status(201).render("./inventory/add-classification", {
+      title: "Added",
+      nav,
+  })
   } else {
+    console.log('Add didnt happen')
     req.flash("notice", "Sorry, the addition failed.")
     res.status(501).render("./inventory/add-classification", {
         title: "Add Classification",
