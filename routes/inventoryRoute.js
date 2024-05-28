@@ -17,6 +17,6 @@ router.get("/error", utilities.handleErrors(invController.buildErrorView))
 router.get("/", utilities.handleErrors(invController.buildManagementView))
 
 // Router for add classification view
-router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification))
+router.get("/add-classification/", utilities.handleErrors(invController.buildAddClassification))
 
 module.exports = router;

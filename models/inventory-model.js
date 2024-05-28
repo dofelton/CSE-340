@@ -20,7 +20,6 @@ async function getInventoryByClassificationId(classification_id) {
       WHERE i.classification_id = $1`,
       [classification_id]
     )
-    console.log(`classification data: ${data.rows}`)
     return data.rows
   } catch (error) {
     console.error("getclassificationsbyid error " + error)
@@ -29,17 +28,28 @@ async function getInventoryByClassificationId(classification_id) {
 
 async function getInventoryDetailsByInvId(inventoryId) {
   try {
-    console.log(`inventoryid is ${inventoryId}`)
     const data = await pool.query(
       `SELECT * FROM public.inventory 
       WHERE inv_id = $1`,
       [inventoryId]
     )
-    console.log(`Model data: ${data.rows}`)
     return data.rows
   } catch (error) {
     console.error("getclassificationsbyid error " + error)
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryDetailsByInvId };
+/* ************************************
+ * Add new classification
+ **************************************/
+async function addClassification(classification_name) {
+  try {
+      console.log('we are in the addClassification method')
+      const sql = "INSERT INTO classification (classification_name) VALUES ($1) RETURNING *"
+      return await pool.query(sql, [classification_name])
+    } catch (error) {
+      return error.message
+    }
+  }
+
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryDetailsByInvId, addClassification };

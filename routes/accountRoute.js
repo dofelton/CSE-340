@@ -16,7 +16,7 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin))
 //     }
 // )
 
-// Route to login process week 4
+// Route to login process week 5
 router.post(
     "/login",
     regValidate.loginRules(),
@@ -28,16 +28,16 @@ router.post(
 router.get("/register", utilities.handleErrors(accountController.buildRegister))
 
 // Route to process registration begining of week 4
-router.post('/register', utilities.handleErrors(accountController.registerAccount))
+// router.post('/register', utilities.handleErrors(accountController.registerAccount))
 
 // Route for registration submission
-// router.post(
-//     "/register",
-//     regValidate.registrationRules(),
-//     regValidate.checkRegData,
-//     utilities.handleErrors(accountController.registerAccount))
+router.post(
+    "/register",
+    regValidate.registationRules(),
+    regValidate.checkRegData,
+    utilities.handleErrors(accountController.registerAccount))
 
-// default "/" route
+// default "/" route or management view
 router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildManagement))
 
 module.exports = router;

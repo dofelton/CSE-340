@@ -54,7 +54,6 @@ invCont.buildErrorView = async function (req, res, next) {//err,
  * Build vehicle management view
  *****************************/
 invCont.buildManagementView = async function (req, res, next) {
-  console.log("We got this far")
   let nav = await utilities.getNav()
   // const classificationSelect = await utilities.buildClassificationList()
   res.render("./inventory/management", {
@@ -65,12 +64,32 @@ invCont.buildManagementView = async function (req, res, next) {
   })
 }
 
+/*****************************
+ * Build add classification view
+ ***************************** */
 invCont.buildAddClassification = async function (req, res, next) {
+  console.log("Inside buildAddClassificiaiton")
   let nav = await utilities.getNav()
+  const classification_name = req.body
   res.render("./inventory/add-classification", {
     title: "Add Classification",
     nav,
     errors: null,
   })
+  const addResult = await invModel.addClassification(classification_name)
+if (regResult) {
+    req.flash(
+        "notice",
+        `Congratulations, you\'ve added ${classification_name}.`
+    )
+  } else {
+    req.flash("notice", "Sorry, the addition failed.")
+    res.status(501).render("./inventory/add-classification", {
+        title: "Add Classification",
+        nav,
+        errors: null,
+    })
+  }
 }
+
 module.exports = invCont
