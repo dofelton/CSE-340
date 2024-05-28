@@ -16,7 +16,16 @@ router.get("/error", utilities.handleErrors(invController.buildErrorView))
 // Router for management view
 router.get("/", utilities.handleErrors(invController.buildManagementView))
 
-// Router for add classification view
+// Router for add-classification view
 router.get("/add-classification/", utilities.handleErrors(invController.buildAddClassification))
+
+// Router to post add-classification
+router.post("/add-classification/", utilities.handleErrors(invController.addClassification))
+
+// Router for add-inventory view
+router.get("/add-inventory/", utilities.handleErrors(invController.buildAddInventory))
+
+// Router to post add-inventory
+router.post("/add-inventory/", utilities.handleErrors(invController.addInventory))
 
 module.exports = router;
