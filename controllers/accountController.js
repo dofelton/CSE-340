@@ -77,13 +77,14 @@ async function registerAccount(req, res) {
  *  Process login request
  * ************************************ */
 async function accountLogin(req, res) {
+    console.log("begining account login function")
     let nav = await utilities.getNav()
-    console.log('Start login process')
     const { account_email, account_password } = req.body
     const accountData = await accountModel.getAccountByEmail(account_email)
     if (!accountData) {
+        console.log("Authentication failed")
      req.flash("notice", "Please check your credentials and try again.")
-     res.status(400).render("account/login", {
+     res.status(400).render("/account/login", {
       title: "Login",
       nav,
       errors: null,
@@ -93,6 +94,7 @@ async function accountLogin(req, res) {
     }
     try {
      if (await bcrypt.compare(account_password, accountData.account_password)) {
+        console.log("authentication success")
      delete accountData.account_password
      const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 })
      if(process.env.NODE_ENV === 'development') {
