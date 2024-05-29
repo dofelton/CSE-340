@@ -131,6 +131,59 @@ nav ul li {
   width: 80%;
 }
 
+.invManage {
+  display: flex;
+  flex-direction: column;
+  font-size: 2rem;
+}
+
+.form fieldset {
+  margin: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: .5rem 2%
+}
+
+.form legend {
+  color: var(--text);
+  padding: 0 .5rem;
+}
+
+.form label {
+  display: block;
+  padding-top: 1rem;
+  font-size: .9rem;
+}
+
+.form div {
+  padding-top: 1rem;
+  color: var(--text);
+  font-size: .9rem;
+}
+
+.form input[type="text"],
+.form input[type="password"],
+.form input[type="email"],
+.form input[type="number"] {
+  display: block;
+  border: solid 1px var(--border);
+  border-radius: 6px;
+  background-color: var(--background);
+  padding: .75rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.form input[type=submit] {
+  background-image: linear-gradient(blue, rgb(119, 119, 244));
+  color: white;
+  border-radius: 6px;
+  padding: .8rem;
+  width: 96%;
+  max-width: 400px;
+  margin: -1 rem 2% 2rem 2%;
+}
+
 @media (max-width: 700px) {
 #content {
   flex-direction: column;
@@ -163,7 +216,9 @@ fieldset {
   margin: 2rem;
   border: 1px solid var(--border);
   border-radius: 6px;
-  padding: .5rem 2%
+  padding: .5rem 2%;
+  display: flex;
+  flex-direction: column;
 }
 
 label {

@@ -6,7 +6,7 @@
 
 <%- messages() %>
 
-<form id="loginForm" action="/account/login" method="post">
+<form class="form" id="loginForm" action="/account/login" method="post">
     <fieldset>
         <label>Email: <input type="email" id="email" name="account_email" required value="<%= locals.account_email %>"></label>
         <div><p>There must be at least 12 characters, one must be a number, one must be a lowercase letter, one must be a capital, adn one must be a non-alphanumeric character</p></div>

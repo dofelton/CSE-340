@@ -58,7 +58,7 @@ async function addClassification(classification_name) {
 async function addInventory(classification_name) {
   try {
       console.log('we are in the addInventory method')
-      const sql = "INSERT INTO inventory (classification_id, inv_make, inv_model, inv_year, inv_price, inv_description, inv_milage, inv_color) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *"
+      const sql = "INSERT INTO inventory (classification_id, inv_make, inv_model, inv_year, inv_price, inv_description, inv_milage, inv_color, inv_image, inv_thumbnail) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, '/images/vehicles/no-image.png', '/images/vehicles/no-image-tn.png') RETURNING *"
       return await pool.query(sql, [classification_id, inv_make, inv_model, inv_year, inv_price, inv_description, inv_milage, inv_color])
     } catch (error) {
       return error.message
