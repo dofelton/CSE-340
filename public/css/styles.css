@@ -12,6 +12,20 @@
 
 }
 
+ul, li {
+  list-style-type: none;
+  padding: 5px;
+}
+
+#inv-display {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+#inv-display li {
+  border: 1px solid black;
+}
+
 body {
   background-image: url("/images/site/checkerboard.jpg");
   display: flex;
@@ -125,10 +139,26 @@ nav ul li {
   padding-top: 5px;
 }
 
+h1 {
+  text-align: center;
+}
+
 #content {
   display: flex;
   flex-direction: row;
   width: 80%;
+}
+
+#item-display {
+  display: flex;
+  flex-direction: row;
+  text-decoration: none;
+}
+
+.details {
+  border: 1px solid black;
+  padding: 5px;
+  margin-top: 3px;
 }
 
 .invManage {
@@ -181,7 +211,7 @@ nav ul li {
   padding: .8rem;
   width: 96%;
   max-width: 400px;
-  margin: -1 rem 2% 2rem 2%;
+  margin: -1rem 2% 2rem 2%;
 }
 
 @media (max-width: 700px) {
@@ -245,7 +275,7 @@ input[type=submit] {
   padding: .8rem;
   width: 96%;
   max-width: 400px;
-  margin: -1 rem 2% 2rem 2%;
+  margin: -1rem 2% 2rem 2%;
 }
 
 input:required {

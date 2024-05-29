@@ -40,9 +40,9 @@ Util.buildClassificationGrid = async function(data){
       + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
       + 'details"><img src="' + vehicle.inv_thumbnail 
       +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
-      +' on CSE Motors" /></a>'
+      +' on CSE Motors" ></a>'
       grid += '<div class="namePrice">'
-      grid += '<hr />'
+      grid += '<hr >'
       grid += '<h2>'
       grid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
       + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
@@ -67,21 +67,23 @@ Util.buildClassificationGrid = async function(data){
 Util.buildIndividualItem = async function(data){
   console.log(`Build data is ${data}`)
   let item
-  // if (data.length > 0)
     {
-    item = '<ul id="detail-display">'
-    item = '<meta title="'+ data.inv_make + ' '+ data.inv_model + '/>'
+    item = '<ul>'
+    item += '<meta title="'+ data.inv_make + ' '+ data.inv_model + '/>'
+    item += '<div id="detail-display">'
     item += '<ul id="item-display">'
     item += '<li>'
     item += '<img src="' + data.inv_image
     +'" alt="Image of '+ data.inv_make + ' ' + data.inv_model
     +' on CSE Motors" />'
+    item += '<div class="details">'
     item += '<h2>'+ data.inv_year + ' ' + data.inv_make + ' '+ data.inv_model + '</h2>'
     item += '<h3>Our Low Price $'+ new Intl.NumberFormat('en-US').format(data.inv_price) + '</h3>'
-    item += '<div class"details">'
     item += '<p>Description: '+ data.inv_description + '</p>'
     item += '<p>Milage: '+ new Intl.NumberFormat('en-US').format(data.inv_miles) + '</p>'
     item += '<p>Color: ' + data.inv_color + '</p>'
+    item += '</div>'
+    item += '</div>'
   }
   return item
 }

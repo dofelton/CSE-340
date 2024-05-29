@@ -28,7 +28,6 @@ invCont.buildByIndividual = async function (req, res, next) {
   const item = await utilities.buildIndividualItem(data[0]);
   let nav = await utilities.getNav();
   const className = data[0].inv_model;
-  console.log(`className = ${className}`);
   res.render("./inventory/detail", {
     title: className,
     nav,
@@ -84,9 +83,8 @@ invCont.buildAddClassification = async function (req, res, next) {
  * process Add Classification
  **********************************/
 invCont.addClassification = async function (req, res, next) {
-  console.log("Inside addClassificiaiton")
   let nav = await utilities.getNav()
-  const classification_name = req.body
+  const { classification_name } = req.body
   const addResult = await invModel.addClassification(classification_name)
 if (addResult) {
   console.log('Added Successfully')
@@ -94,7 +92,7 @@ if (addResult) {
         "notice",
         `Congratulations, you\'ve added ${classification_name}.`
     )
-    res.status(201).render("./inventory/add-classification", {
+    res.status(201).render("./inventory/management", {
       title: "Add classification",
       nav,
   })
@@ -139,7 +137,7 @@ if (addResult) {
         "notice",
         `Congratulations, you\'ve added ${inv_model}.`
     )
-    res.status(201).render("./inventory/add-inventory", {
+    res.status(201).render("./inventory/management", {
       title: "Add inventory",
       nav,
       classificationSelect,
