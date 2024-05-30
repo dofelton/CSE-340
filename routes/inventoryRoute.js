@@ -13,7 +13,7 @@ router.get("/detail/:inventoryId", utilities.handleErrors(invController.buildByI
 // Router for intentional error
 router.get("/error", utilities.handleErrors(invController.buildErrorView))
 
-// Router for management view
+// Router for inventory management view
 router.get("/", utilities.handleErrors(invController.buildManagementView))
 
 // Router for add-classification view
@@ -27,5 +27,20 @@ router.get("/add-inventory/", utilities.handleErrors(invController.buildAddInven
 
 // Router to post add-inventory
 router.post("/add-inventory/", utilities.handleErrors(invController.addInventory))
+
+// Router to get inventory JSON
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
+// route for inventory edit
+router.get("/edit/:inventoryId", utilities.handleErrors(invController.editInventory))
+
+// router to process the inventory update
+router.post("/edit-inventory", utilities.handleErrors(invController.updateInventory))
+
+// route for delete inventory
+router.get("/delete/:inventoryId:", utilities.handleErrors(invController.buildDeleteView))
+
+// route to process delete inventory
+router.post("/delete/:inv_id", utilities.handleErrors(invController.deleteInventory))
 
 module.exports = router;

@@ -1,0 +1,23 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<form class="form" id="deleteForm" action="/delete-inventory" method="post">
+    <fieldset>
+        <legend>Delete Vehicle:</legend>
+        <label><%- classificationSelect %></label>
+        <label>Make: <input type="text" id="invMake" name="inv_make" readonly pattern="[A-Za-z]+" value="<%= locals.inv_make %>"></label>
+        <label>Model: <input type="text" id="invModel" name="inv_model" readonly pattern="[A-Za-z]+" value="<%= locals.inv_model %>"></label>
+        <label>Year: <input type="number" id="invYear" name="inv_year" readonly pattern="[0-9]+" value="<%= locals.inv_year %>"></label>
+        <label>Price: $<input type="number" id="invPrice" name="inv_price" readonly pattern="[0-9]+" value="<%= locals.inv_price %>"></label>
+        <p>Confirm Deletion- This deletion is permanant</p>
+        <input type="submit" name="submit" value="Delete Vehicle" >
+        <input type="hidden" name="inv_id"
+        <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+        <% } %>>
+    </fieldset>
+</form>

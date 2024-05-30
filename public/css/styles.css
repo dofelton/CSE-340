@@ -143,6 +143,10 @@ h1 {
   text-align: center;
 }
 
+h2 {
+  margin: 3rem;
+}
+
 #content {
   display: flex;
   flex-direction: row;
@@ -212,6 +216,16 @@ h1 {
   width: 96%;
   max-width: 400px;
   margin: -1rem 2% 2rem 2%;
+}
+
+#inventoryDisplay {
+  border: 1px solid black;
+  margin: 10px;
+}
+
+#inventoryDisplay td {
+  border: 1px solid black;
+  padding: 1px;
 }
 
 @media (max-width: 700px) {
