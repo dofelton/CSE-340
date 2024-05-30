@@ -6,7 +6,7 @@
 
 <%- messages() %>
 
-<form class="form" id="updateForm" action="/edit-inventory" method="post">
+<form class="form" id="updateForm" action="/inv/edit-inventory" method="post">
     <fieldset>
         <legend>Edit the inventory:</legend>
         <label><%- classificationSelect %></label>
@@ -14,10 +14,10 @@
         <label>Model: <input type="text" id="invModel" name="inv_model" required pattern="[A-Za-z]+" value="<%= locals.inv_model %>"></label>
         <label>Year: <input type="number" id="invYear" name="inv_year" required pattern="[0-9]+" value="<%= locals.inv_year %>"></label>
         <label>Price: $<input type="number" id="invPrice" name="inv_price" required pattern="[0-9]+" value="<%= locals.inv_price %>"></label>
-        <label>Description: <input type="text" id="invDescription" name="inv_description" required pattern="[A-Za-z]+" value="<%= locals.inv_description %>"></label>
+        <label>Description: <input type="text" id="invDescription" name="inv_description" required pattern="[A-Za-z0-9 ]+" value="<%= locals.inv_description %>"></label>
         <label>Milage: <input type="number" id="invMilage" name="inv_milage" required pattern="[0-9]+" value="<%= locals.inv_milage %>"></label>
         <label>Color: <input type="text" id="invColor" name="inv_color" required pattern="[A-Za-z]+" value="<%= locals.inv_color %>"></label>
-        <input type="submit" name="submit" value="Update Vehicle" disabled="disabled">
+        <input type="submit" name="submit" value="Update Vehicle"> <!--  disabled="disabled" --> 
         <input type="hidden" name="inv_id"
         <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
         <% } %>>

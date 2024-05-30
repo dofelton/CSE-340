@@ -126,9 +126,9 @@ invCont.buildAddInventory = async function (req, res, next) {
 invCont.addInventory = async function (req, res, next) {
   let nav = await utilities.getNav()
   const classificationSelect = await utilities.buildClassificationList()
-  const { inv_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color, classification_id } = req.body 
+  const { inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color, classification_id } = req.body 
   console.log(inv_make)
-  const addResult = await invModel.addInventory(inv_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color, classification_id)
+  const addResult = await invModel.addInventory(inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color, classification_id)
 if (addResult) {
   console.log('Added Successfully')
     req.flash(
@@ -201,10 +201,12 @@ invCont.editInventory = async function (req, res, next) {
  * process update Inventory
  **********************************/
 invCont.updateInventory = async function (req, res, next) {
+  console.log( `In the controller process`)
   let nav = await utilities.getNav()
   const { inv_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color, classification_id } = req.body 
   const updateResult = await invModel.updateInventory(inv_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color, classification_id)
 if (updateResult) {
+  console.log(`In the update method: $({updateResult}.`)
   const itemName = updateResult.inv_make + " " + updateResult.inv_model
   req.flash("notice", `The ${itemName} was successfully updated.`)
   res.redirect("/inv/")

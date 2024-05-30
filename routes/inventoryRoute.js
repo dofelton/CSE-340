@@ -35,7 +35,7 @@ router.get("/getInventory/:classification_id", utilities.handleErrors(invControl
 router.get("/edit/:inventoryId", utilities.handleErrors(invController.editInventory))
 
 // router to process the inventory update
-router.post("/edit-inventory", utilities.handleErrors(invController.updateInventory))
+router.post("/edit/:inventoryId", utilities.handleErrors(invController.updateInventory))
 
 // route for delete inventory
 router.get("/delete/:inventoryId:", utilities.handleErrors(invController.buildDeleteView))
