@@ -104,6 +104,7 @@ Util.checkJWTToken = (req, res, next) => {
         }
         res.locals.accountData = accountData
         res.locals.loggedin = 1
+        console.log(`Account data is: ${res.locals.accountData.rows}`)
         next()
       })
   } else {
@@ -116,9 +117,24 @@ Util.checkJWTToken = (req, res, next) => {
  **************************/
 Util.checkLogin = (req, res, next) => {
   if (res.locals.loggedin) {
+    const totalItems = localStorage.length
+    console.log(`total items: ${totalItems}`)
     next()
   } else {
     req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+}
+
+/***************************
+ * Check account type
+ **************************/
+Util.checkType = (req, res, next) => {
+  console.log(`you are ${res.locals.loggedin}`)
+  if (res.locals.account_type == 'employee' || res.locals.account_type == 'admin') {
+    next()
+  } else {
+    req.flash("notice", "Access for employees and admin only.")
     return res.redirect("/account/login")
   }
 }

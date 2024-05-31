@@ -14,16 +14,16 @@ router.get("/detail/:inventoryId", utilities.handleErrors(invController.buildByI
 router.get("/error", utilities.handleErrors(invController.buildErrorView))
 
 // Router for inventory management view
-router.get("/", utilities.handleErrors(invController.buildManagementView))
+router.get("/", utilities.checkType, utilities.handleErrors(invController.buildManagementView))
 
 // Router for add-classification view
-router.get("/add-classification/", utilities.handleErrors(invController.buildAddClassification))
+router.get("/add-classification/", utilities.checkType, utilities.handleErrors(invController.buildAddClassification))
 
 // Router to post add-classification
 router.post("/add-classification/", utilities.handleErrors(invController.addClassification))
 
 // Router for add-inventory view
-router.get("/add-inventory/", utilities.handleErrors(invController.buildAddInventory))
+router.get("/add-inventory/", utilities.checkType, utilities.handleErrors(invController.buildAddInventory))
 
 // Router to post add-inventory
 router.post("/add-inventory/", utilities.handleErrors(invController.addInventory))
@@ -32,15 +32,15 @@ router.post("/add-inventory/", utilities.handleErrors(invController.addInventory
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 
 // route for inventory edit
-router.get("/edit/:inventoryId", utilities.handleErrors(invController.editInventory))
+router.get("/edit/:inventoryId", utilities.checkType, utilities.handleErrors(invController.editInventory))
 
 // router to process the inventory update
-router.post("/edit/:inventoryId", utilities.handleErrors(invController.updateInventory))
+router.post("/edit-inventory", utilities.handleErrors(invController.updateInventory))
 
 // route for delete inventory
-router.get("/delete/:inventoryId:", utilities.handleErrors(invController.buildDeleteView))
+router.get("/delete/:inventoryId:", utilities.checkType, utilities.handleErrors(invController.buildDeleteView))
 
 // route to process delete inventory
-router.post("/delete/:inv_id", utilities.handleErrors(invController.deleteInventory))
+router.post("/delete-inventory", utilities.handleErrors(invController.deleteInventory))
 
 module.exports = router;
