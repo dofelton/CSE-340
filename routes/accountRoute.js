@@ -8,7 +8,7 @@ const regValidate = require('../utilities/account-validation')
 // Route to build login view
 router.get("/login", utilities.handleErrors(accountController.buildLogin))
 
-// Process the login attempt
+// Process the login attempt week 4
 // router.post(
 //     "/login",
 //     (req, res) => {
@@ -19,8 +19,10 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin))
 // Route to login process week 5
 router.post(
     "/login",
-    regValidate.loginRules(),
-    regValidate.checkLoginData,
+    (req, res, next) => {
+        console.log("Request body:", JSON.stringify(req.body, null, 2));
+        next();
+    },
     utilities.handleErrors(accountController.accountLogin)
 )
 
@@ -38,6 +40,30 @@ router.post(
     utilities.handleErrors(accountController.registerAccount))
 
 // default "/" route or management view
-router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildManagement))
+router.get("/", utilities.handleErrors(accountController.buildManagement))  // , utilities.checkLogin
+
+// Route for account logout
+router.get(
+    'logout',
+    (req, res) => {res.clearCookie('jwt');
+        res.redirect('/')
+    }
+)
+
+// build account update
+router.get("/account-update:account_id", utilities.handleErrors(accountController.buildAccountUpdate))
+
+// process account update
+router.post(
+    "/account-update",
+    utilities.checkLogin,
+    utilities.handleErrors(accountController.updateAccount)
+)
+
+router.post(
+    "/change-password",
+    utilities.checkLogin,
+    utilities.handleErrors(accountController.changePassword)
+)
 
 module.exports = router;

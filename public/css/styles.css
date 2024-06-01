@@ -11,10 +11,15 @@
   --border: rgb(113, 112, 112)
 
 }
+h1 {
+  text-align: center;
+  background: white;
+}
 
-ul, li {
+ul, li, h1 {
   list-style-type: none;
   padding: 5px;
+
 }
 
 #inv-display {
@@ -36,6 +41,8 @@ body {
   width: 90%;
   border: 2px solid yellow;
   background: white;
+  max-height: 20px;
+
 }
 
 #top-header {
@@ -66,6 +73,7 @@ nav {
 nav ul {
   display: flex;
   flex-direction: row;
+  background: yellow;
 }
 
 nav ul li {
@@ -108,6 +116,8 @@ nav ul li {
   border: 1px solid black;
   padding: 20px;
   width: 50%;
+  background: white;
+
 }
 
 .upgrades h3 {
@@ -133,14 +143,12 @@ nav ul li {
   font-size: large;
   padding: 10px;
   width: 50%;
+  background: white;
+
 }
 
 .reviews li {
   padding-top: 5px;
-}
-
-h1 {
-  text-align: center;
 }
 
 h2 {
@@ -175,7 +183,8 @@ h2 {
   margin: 2rem;
   border: 1px solid var(--border);
   border-radius: 6px;
-  padding: .5rem 2%
+  padding: .5rem 2%;
+  background: var(--background);
 }
 
 .form legend {
@@ -216,6 +225,10 @@ h2 {
   width: 96%;
   max-width: 400px;
   margin: -1rem 2% 2rem 2%;
+}
+
+#inv-display {
+  background: white;
 }
 
 #inventoryDisplay {

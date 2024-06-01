@@ -31,13 +31,54 @@ async function checkExistingEmail(account_email){
 * ***************************** */
 async function getAccountByEmail (account_email) {
     try {
+      console.log(`Account email in model: ${account_email}`)
       const result = await pool.query(
         'SELECT account_id, account_firstname, account_lastname, account_email, account_type, account_password FROM account WHERE account_email = $1',
         [account_email])
+        console.log(`Query results: ${result.rows}`)
       return result.rows[0]
     } catch (error) {
       return new Error("No matching email found")
     }
   }
 
-module.exports = { registerAccount, checkExistingEmail, getAccountByEmail }
+/* *****************************
+* Return account data using id
+* ***************************** */
+async function getAccountById (account_id) {
+  try {
+    const result = await pool.query(
+      'SELECT account_id, account_firstname, account_lastname, account_email, account_type, account_password FROM account WHERE account_id = $1',
+      [account_id])
+      return result.rows[0]
+  } catch (error) {
+    return new Error("No matching account id found")
+  }
+}
+
+/* *****************************
+* Update account
+* ***************************** */
+async function updateAccount (account_id, account_firstname, account_lastname, account_email) {
+  try {
+    const sql = "UPDATE account SET account_firstname = $1, account_lastname = $2, account_email = $3, WHERE account_id = $4";
+    const result = await pool.query(sql, [account_id, account_firstname, account_lastname, account_email]);
+    return result.rowCount> 0;
+  } catch (error) {
+    console.error('Error updating account', error);
+    throw error;
+  }
+}
+
+/* *****************************
+* Update password
+* ***************************** */
+async function updatePassword(account_id, new_password) {
+  try {
+    const sql = "UPDATE account SET account_password = $1 WHERE account_id = $2 RETURNING *";
+  } catch (error) {
+    return error.message;
+  }
+}
+
+module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, getAccountById, updateAccount, updatePassword }

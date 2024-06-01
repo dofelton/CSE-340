@@ -6,8 +6,17 @@
 
 <%- messages() %>
 
-<h1>You're logged in!</h1>
+<h1>Welcome <%= accountData.account_firstname %></h1>
+<ul>
+    <li>
+        <a href="/account/account-update/<%= accountData.account_id %>" title="Update Account Information">Update Account Information</a>
+    </li>
+</ul>
 
+<% if (accountData.account_type === "employee" || accountData.account_type === "admin") { %>
+    <h2>Inventory Management</h2>
+    <p><a href="/inv/" title="Access the inventory management page">Inventory Management</a></p>
+<% } %>
 
 <% if (errors) { %>
     <ul class="notice">

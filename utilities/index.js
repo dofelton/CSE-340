@@ -129,15 +129,15 @@ Util.checkLogin = (req, res, next) => {
 /***************************
  * Check account type
  **************************/
-Util.checkType = (req, res, next) => {
-  console.log(`you are ${res.locals.loggedin}`)
-  if (res.locals.account_type == 'employee' || res.locals.account_type == 'admin') {
-    next()
-  } else {
-    req.flash("notice", "Access for employees and admin only.")
-    return res.redirect("/account/login")
-  }
-}
+// Util.checkType = (req, res, next) => {
+//   console.log(`you are ${res.locals.loggedin}`)
+//   if (res.locals.account_type == 'employee' || res.locals.account_type == 'admin') {
+//     next()
+//   } else {
+//     req.flash("notice", "Access for employees and admin only.")
+//     return res.redirect("/account/login")
+//   }
+// }
 
 /* ****************************************
  * Middleware For Handling Errors

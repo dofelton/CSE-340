@@ -1,0 +1,41 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<h1>Account Update</h1>
+
+<form class="form" action="/account/account-update" method="post">
+    <fieldset>
+        <legend>Update Account Information</legend>
+        <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
+        <label>First name: <input type="text" id="accountFirstname" name="account_firstname" required value="<%= accountData.account_firstname %>"></label>
+        <label>Last name :<input type="text" id="accountLastname" name="account_lastname" required value="<%= accountData.account_lastname %>"></label>
+        <label>Email: <input type="email" id="accountEmail" name="account_email" required value="<%= accountData.account_email %>"></label>
+        <input type="submit" value="Update Account">
+    </fieldset>
+</form>
+
+<form action="/account/change-password" method="post">
+    <fieldset>
+        <legend>Change Password</legend>
+        <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
+        <label>Current Password: <input type="password" name="current_password" required></label>
+        <p>Completing this form will change your password.</p>
+        <label>New Password: <input type="password" id="newPassword" name="new_password" required pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12.}$"></label>
+        <div><p>There must be at least 12 characters, one must be a number, one must be a lowercase letter, one must be a capital, and one must be a non-alphanumeric character</p></div>
+        <label>Confirm New Password: <input type="password" id="confirmNewPassword" name="confirm_newPassword" required></label>
+        <input type="submit" value="Change Password">
+    </fieldset>
+</form>
+
+<% if (errors) { %>
+    <ul class="notice">
+        <% errors.array().forEach(error => { %>
+            <li><%= error.msg %></li>
+        <% }) %>
+    </ul>
+<% } %>
