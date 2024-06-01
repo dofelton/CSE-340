@@ -23,7 +23,7 @@ async function accountLogin(req, res) {
     let nav = await utilities.getNav()
     const { account_email, account_password } = req.body
     const accountData = await accountModel.getAccountByEmail(account_email)
-    console.log(`Account Data in accountLogin is: ${accountData}`)
+    console.log(`Account Data in accountLogin is: ${accountData.account_email}`)
     if (!accountData) {
      req.flash("notice", "Please check your credentials and try again.")
      res.status(400).render("/account/login", {
@@ -118,18 +118,20 @@ async function registerAccount(req, res) {
 async function buildManagement(req, res, next) {
     let nav = await utilities.getNav()
     res.render("account/accountManagement", {
-        title: "Register",
+        title: "Account Management",
         nav,
         errors: null,
     })
 }
 
-/* **************************
+/* ***************************
  * Check if employee or admin
  ***************************/
 function checkEmployeeStatus(req, res, next) {
     if(req.cookies.jwt) {
-        jwt.verify(req.cookies.jwt, proess.env.ACCESS_TOKEN_SECRET, function(err, accountData) {
+        console.log(`In checkEmployeeStatus`)
+        jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET, function(err, accountData) {
+            console.log(`CheckEmployeeStatus: ${accountData.account_type}`)
             if(err) {
                 req.flash("notice", "Please log in to access this page.");
                 res.clearCookie("jwt");
@@ -156,6 +158,7 @@ function checkEmployeeStatus(req, res, next) {
  ******************************* */
 async function buildAccountUpdate(req, res, next) {
     let nav = await utilities.getNav();
+    console.log("In buildAccountUpdate")
     let accountId =req.params.id;
     let accountData = res.locals.acccountData
     let accountDataById = await accountModel.getAccountById(accountId);

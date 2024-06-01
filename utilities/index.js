@@ -104,7 +104,7 @@ Util.checkJWTToken = (req, res, next) => {
         }
         res.locals.accountData = accountData
         res.locals.loggedin = 1
-        console.log(`Account data is: ${res.locals.accountData.rows}`)
+        console.log(`Account data in checkTokenValidity is: ${accountData.account_type}`)
         next()
       })
   } else {

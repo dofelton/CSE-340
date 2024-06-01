@@ -129,7 +129,7 @@ invCont.addInventory = async function (req, res, next) {
   const { inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color, classification_id } = req.body 
   console.log(inv_make)
   const addResult = await invModel.addInventory(inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color, classification_id)
-  console.log(`added data: ${addResult}`)
+  console.log(`added inventory data: ${addResult}`)
 if (addResult) {
     req.flash(
         "notice",

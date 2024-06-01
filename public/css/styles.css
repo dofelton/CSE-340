@@ -9,17 +9,20 @@
   --text: #008bee;
   --background: #eee;
   --border: rgb(113, 112, 112)
-
 }
+
 h1 {
   text-align: center;
+}
+
+h1, h2, div, p {
   background: white;
 }
 
 ul, li, h1 {
   list-style-type: none;
   padding: 5px;
-
+  background: var(--background);
 }
 
 #inv-display {
@@ -161,7 +164,7 @@ h2 {
   width: 80%;
 }
 
-#item-display {
+#item-display li {
   display: flex;
   flex-direction: row;
   text-decoration: none;
@@ -224,7 +227,7 @@ h2 {
   padding: .8rem;
   width: 96%;
   max-width: 400px;
-  margin: -1rem 2% 2rem 2%;
+  /* margin: -1rem 2% 2rem 2%; */
 }
 
 #inv-display {

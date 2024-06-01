@@ -50,7 +50,7 @@ router.get(
     }
 )
 
-// build account update
+// build account update 
 router.get("/account-update:account_id", utilities.handleErrors(accountController.buildAccountUpdate))
 
 // process account update
