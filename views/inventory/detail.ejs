@@ -1,15 +1,20 @@
 <!-- ***********************
  * Build Content Heading
  * ************************ -->
- <% if (title) { %>
-    <h1><%= title %></h1>
-    <% } else {
-      res.redirect('/')
-    } %>
-  
-  <!-- Build Message Block -->
-  
-  <%- messages() %>
+<% if (title) { %>
+  <h1><%= title %></h1>
+  <% } else {
+    res.redirect('/')
+  } %>
 
-  <!-- Build Item display-->
-  <%- item %>
+<!-- Build Message Block -->
+
+<%- messages() %>
+
+<!-- Build Item display-->
+<%- item %>
+
+<div class="review">
+<h2>Customer Reviews</h2>
+<%- review %>
+</div>

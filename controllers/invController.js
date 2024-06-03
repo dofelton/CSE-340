@@ -27,12 +27,15 @@ invCont.buildByIndividual = async function (req, res, next) {
   const inventory_id = req.params.inventoryId;
   const data = await invModel.getInventoryDetailsByInvId(inventory_id);
   const item = await utilities.buildIndividualItem(data[0]);
+  const reviewData = await invModel.getReviews(inventory_id);
+  const review = await utilities.buildReview(reviewData[0]);
   let nav = await utilities.getNav();
   const className = data[0].inv_model;
   res.render("./inventory/detail", {
     title: className,
     nav,
     item,
+    review,
     errors: null,
   })
 }

@@ -44,14 +44,14 @@ router.get("/", utilities.handleErrors(accountController.buildManagement))  // ,
 
 // Route for account logout
 router.get(
-    'logout',
+    '/logout',
     (req, res) => {res.clearCookie('jwt');
         res.redirect('/')
     }
 )
 
 // build account update 
-router.get("/account-update:account_id", utilities.handleErrors(accountController.buildAccountUpdate))
+router.get("/account-update/:account_id", utilities.handleErrors(accountController.buildAccountUpdate))
 
 // process account update
 router.post(

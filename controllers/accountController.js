@@ -159,9 +159,12 @@ function checkEmployeeStatus(req, res, next) {
 async function buildAccountUpdate(req, res, next) {
     let nav = await utilities.getNav();
     console.log("In buildAccountUpdate")
-    let accountId =req.params.id;
+    let accountId =req.params.account_id;
+    console.log(`local accountId: ${accountId}`)
     let accountData = res.locals.acccountData
+    console.log(`local accountData: ${accountData.account_id}`)
     let accountDataById = await accountModel.getAccountById(accountId);
+    console.log(`AccountDatabyId: ${accountDataById}`)
     res.render("account/account-update", {
         title: "Update Account Information",
         nav,
@@ -175,12 +178,16 @@ async function buildAccountUpdate(req, res, next) {
  *  Update Account Information
  ******************************* */
 async function updateAccount(req,res) {
+    console.log(`You have reached the updateAccount method.`);
     let nav = await utilities.getNav();
     const { account_id, account_firstname, account_lastname, account_email } = req.body;
     const updateResult = await accountModel.updateAccount(account_id, account_firstname, account_lastname, account_email)
+    console.log(`Account id: ${account_id}`)
+    
     if(updateResult) {
+        console.log(`accountData.accountId: ${accountData.account_id}`)
         const updatedAccountData = await accountModel.getAccountById(account_id);
-        delete updatedAccountData.accountData.account_password;
+        delete updatedAccountData.account_password;
         const accessToken = jwt.sign(updatedAccountData, process.env.ACCESS_TOKEN_SECRET, {expiresIn: 3600})
         if(process.env.NODE_ENV === "development") {
             res.cookie("jwt", accessToken, {httpOnly: true, maxAge: 3600 * 1000});

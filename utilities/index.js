@@ -88,6 +88,29 @@ Util.buildIndividualItem = async function(data){
   return item
 }
 
+/* ***************************************
+ * Build Review view
+ **********************************/
+Util.buildReview = async function(reviewData){
+  console.log(`In buildReview method revewData is ${reviewData.rows}`)
+    let review 
+    if(reviewData.length > 0) {
+      review = '<form class="form" id="reviewForm" action="/inv/detail" method="post">'
+      review += '<fieldset>'
+      review += '<legend>Leave a review</legend>'
+      review += '<label>Review Text: <input type="text" id="review_text" name="review_text" required></label>'
+      review += '<input type="hidden" value="' + reviewData.inv_id + '">'
+      review += '<input type="hidden" value="' + reviewData.account_id + '">'
+      review += '<input type="submit" value="Leave Review">'
+      review += '</fieldset>'
+      review += '</form>'
+  } else {
+    review = '<h2>Be the first to leave a review!!!</h2>'
+    review += '<button id="showForm">Leave a Review</button>'
+  }
+    return review
+}
+
 /* *******************
  * Middleware to check token validity
  *********************/

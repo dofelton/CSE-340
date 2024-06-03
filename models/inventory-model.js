@@ -43,6 +43,23 @@ async function getInventoryDetailsByInvId(inventoryId) {
 }
 
 /* ************************************
+ * Get inventory reviews by individual id
+ **************************************/
+async function getReviews(inventoryId) {
+  try {
+    const data = await pool.query(
+      `SELECT * FROM public.review 
+      WHERE inv_id = $1`,
+      [inventoryId]
+    )
+    console.log(`Model Review method: ${data.review_id}`)
+    return data.rows
+  } catch (error) {
+    console.error("getreviews error " + error)
+  }
+}
+
+/* ************************************
  * Add new classification
  **************************************/
 async function addClassification(classification_name) {
@@ -117,5 +134,5 @@ async function deleteInventory(inventory_id) {
     }
   }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryDetailsByInvId, addClassification, addInventory, updateInventory, deleteInventory };
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryDetailsByInvId, addClassification, addInventory, updateInventory, deleteInventory, getReviews };
 
