@@ -28,18 +28,18 @@ invCont.buildByIndividual = async function (req, res, next) {
   const data = await invModel.getInventoryDetailsByInvId(inventory_id);
   const item = await utilities.buildIndividualItem(data[0]);
   const reviewData = await invModel.getReviews(inventory_id);
-  const review = await utilities.buildReview(reviewData[0]);
+  // const review = await utilities.buildReview(reviewData[0]);
   let nav = await utilities.getNav();
   const className = data[0].inv_model;
   res.render("./inventory/detail", {
     title: className,
     nav,
     item,
-    review,
+    // review,
     errors: null,
   })
 }
-
+ 
 /* ***************************
  * Build Error view for intentional error process
  ************************************ */
@@ -87,6 +87,7 @@ invCont.addClassification = async function (req, res, next) {
   let nav = await utilities.getNav()
   const { classification_name } = req.body
   const addResult = await invModel.addClassification(classification_name)
+  let classificationSelect = await utilities.buildClassificationList()
 if (addResult) {
   console.log('Added Successfully')
     req.flash(
@@ -96,6 +97,7 @@ if (addResult) {
     res.status(201).render("./inventory/management", {
       title: "Add classification",
       nav,
+      classificationSelect,
       errors: null,
   })
   } else {

@@ -65,7 +65,7 @@ Util.buildClassificationGrid = async function(data){
  ******************************************/
 
 Util.buildIndividualItem = async function(data){
-  console.log(`Build data is ${data}`)
+  console.log(`Build data is ${data[0]}`)
   let item
     {
     item = '<ul>'
@@ -92,7 +92,7 @@ Util.buildIndividualItem = async function(data){
  * Build Review view
  **********************************/
 Util.buildReview = async function(reviewData){
-  console.log(`In buildReview method revewData is ${reviewData.rows}`)
+  console.log(`In buildReview method reviewData is ${reviewData}`)
     let review 
     if(reviewData.length > 0) {
       review = '<form class="form" id="reviewForm" action="/inv/detail" method="post">'

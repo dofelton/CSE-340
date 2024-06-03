@@ -160,7 +160,7 @@ async function buildAccountUpdate(req, res, next) {
     let nav = await utilities.getNav();
     console.log("In buildAccountUpdate")
     let accountId =req.params.account_id;
-    console.log(`local accountId: ${accountId}`)
+    console.log(`params accountId: ${accountId}`)
     let accountData = res.locals.acccountData
     console.log(`local accountData: ${accountData.account_id}`)
     let accountDataById = await accountModel.getAccountById(accountId);

@@ -52,8 +52,8 @@ async function getReviews(inventoryId) {
       WHERE inv_id = $1`,
       [inventoryId]
     )
-    console.log(`Model Review method: ${data.review_id}`)
-    return data.rows
+    console.log(`Model Review method: ${data.review_id[0]}`)
+    // return data.rows
   } catch (error) {
     console.error("getreviews error " + error)
   }
