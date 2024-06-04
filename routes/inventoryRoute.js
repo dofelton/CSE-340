@@ -58,4 +58,10 @@ router.get("/delete/:inventoryId:", accountController.checkEmployeeStatus, utili
 // route to process delete inventory
 router.post("/delete-inventory", utilities.handleErrors(invController.deleteInventory))
 
+// route to build write review page
+router.get("/write-review", utilities.handleErrors(invController.buildWriteReview))
+
+// route to process write review
+router.post("/write-review", utilities.handleErrors(invController.writeReview))
+
 module.exports = router;

@@ -25,17 +25,18 @@ invCont.buildByClassificationId = async function (req, res, next) {
  * ************************** */
 invCont.buildByIndividual = async function (req, res, next) {
   const inventory_id = req.params.inventoryId;
+  const inv_id = inventory_id
   const data = await invModel.getInventoryDetailsByInvId(inventory_id);
   const item = await utilities.buildIndividualItem(data[0]);
-  const reviewData = await invModel.getReviews(inventory_id);
-  // const review = await utilities.buildReview(reviewData[0]);
+  const reviews = await utilities.displayReviews(inventory_id);
   let nav = await utilities.getNav();
   const className = data[0].inv_model;
   res.render("./inventory/detail", {
     title: className,
     nav,
     item,
-    // review,
+    reviews,
+    inv_id: inv_id,
     errors: null,
   })
 }
@@ -293,5 +294,57 @@ if (deleteResult) {
   }
 }
 
+/* ***************************
+ * Build vehicle management view
+ *****************************/
+invCont.buildManagementView = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  let classificationSelect = await utilities.buildClassificationList()
+  res.render("./inventory/management", {
+    title: "Vehicle Management",
+    nav,
+    errors: null,
+    classificationSelect,
+  })
+}
+/* ***************************
+ * Build write review view
+ *****************************/
+invCont.buildWriteReview = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  let { inv_id } = req.body
+  console.log(`build review inv id: ${inv_id}`)
+  res.render("./inventory/write-review", {
+    title: "Write Review",
+    nav,
+    inv_id: inv_id,
+    errors: null,
+  })
+}
+
+/* ***************************
+ * process write review 
+ *****************************/
+invCont.writeReview = async function (req, res, next) {
+  let { review_text, inv_id } = req.body
+  const account_id = res.locals.accountData.account_id
+  console.log(`res.local.account_id: ${account_id}, ${inv_id}, ${review_text}`)
+  const review = await invModel.addReview(review_text, inv_id, account_id)
+  req.flash("notice", `The review has been posted.`)
+  res.redirect("/")
+  
+}
 
 module.exports = invCont;
+
+
+// let nav = await utilities.getNav()
+//   const data = await invModel.getInventoryDetailsByInvId(inv_id);
+//   const item = await utilities.buildIndividualItem(data[0]);
+//   res.render(`./inventory/detail/${inv_id}`,{
+//     title: "Detail view",
+//     nav,
+//     item,
+//     reviews,
+//     errors: null,
+//     })

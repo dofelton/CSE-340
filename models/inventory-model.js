@@ -29,33 +29,17 @@ async function getInventoryByClassificationId(classification_id) {
  * Get inventory details for an individual item
  **************************************/
 async function getInventoryDetailsByInvId(inventoryId) {
+  console.log(`getInvDetById inventoryId: ${inventoryId}`)
   try {
     const data = await pool.query(
       `SELECT * FROM public.inventory 
       WHERE inv_id = $1`,
       [inventoryId]
     )
-    console.log(`Model method: ${data.rows}`)
+    console.log(`Model method: ${data.rows.length}`)
     return data.rows
   } catch (error) {
-    console.error("getclassificationsbyid error " + error)
-  }
-}
-
-/* ************************************
- * Get inventory reviews by individual id
- **************************************/
-async function getReviews(inventoryId) {
-  try {
-    const data = await pool.query(
-      `SELECT * FROM public.review 
-      WHERE inv_id = $1`,
-      [inventoryId]
-    )
-    console.log(`Model Review method: ${data.review_id[0]}`)
-    // return data.rows
-  } catch (error) {
-    console.error("getreviews error " + error)
+    console.error("getInventoryDetailsByInvId error " + error)
   }
 }
 
@@ -134,5 +118,34 @@ async function deleteInventory(inventory_id) {
     }
   }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryDetailsByInvId, addClassification, addInventory, updateInventory, deleteInventory, getReviews };
+/* ************************************
+ * Get inventory reviews by inventory id
+ **************************************/
+async function getReviews(inventoryId) {
+  try {
+    const data = await pool.query(
+      `SELECT * FROM public.review 
+      WHERE inv_id = $1`,
+      [inventoryId]
+    )
+    console.log(`Model Review method: ${data.rows.length}`)
+    return data.rows
+  } catch (error) {
+    console.error("getreviews error " + error)
+  }
+}
+
+/* ************************************
+ * Add new review
+ **************************************/
+async function addReview(review_text, inv_id, account_id) {
+  try {
+      const sql = "INSERT INTO review (review_text, inv_id, account_id) VALUES ($1, $2, $3) RETURNING *"
+      return await pool.query(sql, [review_text, inv_id, account_id])
+    } catch (error) {
+      return error.message
+    }
+  }
+
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryDetailsByInvId, addClassification, addInventory, updateInventory, deleteInventory, getReviews, addReview };
 

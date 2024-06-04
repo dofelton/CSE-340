@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model")
+const acctModel = require("../models/account-model")
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
 const Util = {}
@@ -65,7 +66,8 @@ Util.buildClassificationGrid = async function(data){
  ******************************************/
 
 Util.buildIndividualItem = async function(data){
-  console.log(`Build data is ${data[0]}`)
+  console.log(`Build Ind Item data is ${data.rows}`)
+  // const inv_id = parseInt(req.params.inventoryId)
   let item
     {
     item = '<ul>'
@@ -84,32 +86,54 @@ Util.buildIndividualItem = async function(data){
     item += '<p>Color: ' + data.inv_color + '</p>'
     item += '</div>'
     item += '</div>'
+
   }
   return item
 }
 
 /* ***************************************
- * Build Review view
+ * Build display Reviews
  **********************************/
-Util.buildReview = async function(reviewData){
-  console.log(`In buildReview method reviewData is ${reviewData}`)
-    let review 
-    if(reviewData.length > 0) {
-      review = '<form class="form" id="reviewForm" action="/inv/detail" method="post">'
-      review += '<fieldset>'
-      review += '<legend>Leave a review</legend>'
-      review += '<label>Review Text: <input type="text" id="review_text" name="review_text" required></label>'
-      review += '<input type="hidden" value="' + reviewData.inv_id + '">'
-      review += '<input type="hidden" value="' + reviewData.account_id + '">'
-      review += '<input type="submit" value="Leave Review">'
-      review += '</fieldset>'
-      review += '</form>'
+Util.displayReviews = async function(inventory_id){
+  console.log(`In displayReviews method ${inventory_id}`)
+  let reviewData = await invModel.getReviews(inventory_id);
+  console.log(`Reviews count: ${reviewData.length}`);
+  let reviews
+  if(reviewData > 0) {
+    reviews = '<ul id="review-display">'
+    reviewData.forEach(data => {
+      reviews += '<li>'
+      reviews += 'data.account_id' //'data.account_firstname + data.account_lastname' 
+      reviews +='<li>' + data.review_text + '<li>'
+      reviews +='<li>' + data.review_date + '<li>' // time stamp
+    })
+    reviews += '<ul>'
   } else {
-    review = '<h2>Be the first to leave a review!!!</h2>'
-    review += '<button id="showForm">Leave a Review</button>'
+    reviews += '<p class="notice">Be the first to leave a review!<p>'
   }
-    return review
+  return reviews
 }
+
+/* ***************************************
+ * Build display account reviews
+ **********************************/
+Util.displayAccountReviews = async function(account_id){
+  console.log(`In displayReviews method ${account_id_id}`)
+  let reviewData = await acctModel.getAccountReviews(account_id);
+  console.log(`Reviews count: ${reviewData.length}`);
+  let reviews
+ {
+    reviews = '<ul id="review-display">'
+    reviewData.forEach(data => {
+      reviews += '<li>' + data.account_id + '<li>' //'data.account_firstname + data.account_lastname' 
+      reviews +='<li>' + data.review_text + '<li>'
+      reviews +='<li>' + data.review_date + '<li>' // time stamp
+    })
+    reviews += '<ul>'
+  } 
+  return reviews
+}
+
 
 /* *******************
  * Middleware to check token validity
@@ -128,6 +152,7 @@ Util.checkJWTToken = (req, res, next) => {
         res.locals.accountData = accountData
         res.locals.loggedin = 1
         console.log(`Account data in checkTokenValidity is: ${accountData.account_type}`)
+        console.log(`Account data in checkTokenValidity is: ${accountData.account_id}`)
         next()
       })
   } else {

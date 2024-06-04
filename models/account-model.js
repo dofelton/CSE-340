@@ -81,4 +81,21 @@ async function updatePassword(account_id, new_password) {
   }
 }
 
-module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, getAccountById, updateAccount, updatePassword }
+/* ************************************
+ * Get inventory reviews by account id
+ **************************************/
+async function getAccountReviews(accountId) {
+  try {
+    const data = await pool.query(
+      `SELECT * FROM public.review 
+      WHERE account_id = $1`,
+      [accountIdId]
+    )
+    console.log(`AccountModel Review method: ${data.rows.length}`)
+    return data.rows
+  } catch (error) {
+    console.error("getreviews error " + error)
+  }
+}
+
+module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, getAccountById, updateAccount, updatePassword, getAccountReviews }

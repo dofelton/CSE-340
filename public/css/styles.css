@@ -245,6 +245,10 @@ h2 {
   padding: 1px;
 }
 
+.notice {
+  background: white;
+}
+
 .accountManagement a {
   font-size: large;
   padding-left: 3rem;
