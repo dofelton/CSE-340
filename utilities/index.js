@@ -118,7 +118,7 @@ Util.displayReviews = async function(inventory_id){
  * Build display account reviews
  **********************************/
 Util.displayAccountReviews = async function(account_id){
-  console.log(`In displayReviews method ${account_id_id}`)
+  console.log(`In displayReviews method ${account_id}`)
   let reviewData = await acctModel.getAccountReviews(account_id);
   console.log(`Reviews count: ${reviewData.length}`);
   let reviews
