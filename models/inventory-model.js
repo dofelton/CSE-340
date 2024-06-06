@@ -124,8 +124,10 @@ async function deleteInventory(inventory_id) {
 async function getReviews(inventoryId) {
   try {
     const data = await pool.query(
-      `SELECT * FROM public.review 
-      WHERE inv_id = $1`,
+      `SELECT * FROM public.review AS r
+      JOIN public.account AS a
+      ON r.account_id = a.account_id
+      WHERE r.inv_id = $1`,
       [inventoryId]
     )
     console.log(`Model Review method: ${data.rows.length}`)

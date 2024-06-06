@@ -19,6 +19,9 @@
     <div><a href="/inv/" title="Access the inventory management page">Inventory Management</a></div>
 <% } %>
 
+<h2>Personal Reviews</h2>
+<%- reviews %>
+
 <% if (errors) { %>
     <ul class="notice">
         <% errors.array().forEach(error => { %>

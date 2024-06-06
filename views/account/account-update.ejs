@@ -11,7 +11,7 @@
 <form class="form" action="/account/account-update" method="post">
     <fieldset>
         <legend>Update Account Information</legend>
-        <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
+        <input type="hidden" name="account_id" value="<%= res.locals.accountData.account_id %>">
         <label>First name: <input type="text" id="accountFirstname" name="account_firstname" required value="<%= accountData.account_firstname %>"></label>
         <label>Last name :<input type="text" id="accountLastname" name="account_lastname" required value="<%= accountData.account_lastname %>"></label>
         <label>Email: <input type="email" id="accountEmail" name="account_email" required value="<%= accountData.account_email %>"></label>

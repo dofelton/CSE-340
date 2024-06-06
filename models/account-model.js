@@ -87,9 +87,11 @@ async function updatePassword(account_id, new_password) {
 async function getAccountReviews(accountId) {
   try {
     const data = await pool.query(
-      `SELECT * FROM public.review 
-      WHERE account_id = $1`,
-      [accountIdId]
+      `SELECT * FROM public.review AS r
+      JOIN public.account AS a
+      ON r.account_id = a.account_id
+      WHERE a.account_id = $1`,
+      [accountId]
     )
     console.log(`AccountModel Review method: ${data.rows.length}`)
     return data.rows

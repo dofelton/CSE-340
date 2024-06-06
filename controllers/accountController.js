@@ -117,9 +117,12 @@ async function registerAccount(req, res) {
  ***************************/
 async function buildManagement(req, res, next) {
     let nav = await utilities.getNav()
+    const account_id = res.locals.accountData.account_id
+    let reviews = utilities.displayAccountReviews(account_id)
     res.render("account/accountManagement", {
         title: "Account Management",
         nav,
+        reviews,
         errors: null,
     })
 }
@@ -162,7 +165,7 @@ async function buildAccountUpdate(req, res, next) {
     let accountId =req.params.account_id;
     console.log(`params accountId: ${accountId}`)
     let accountData = res.locals.acccountData
-    console.log(`local accountData: ${accountData.account_id}`)
+    console.log(`local accountData: ${res.locals.accountData.account_id}`) // .account_id
     let accountDataById = await accountModel.getAccountById(accountId);
     console.log(`AccountDatabyId: ${accountDataById}`)
     res.render("account/account-update", {

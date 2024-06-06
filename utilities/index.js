@@ -3,6 +3,7 @@ const acctModel = require("../models/account-model")
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
 const Util = {}
+const session = require('express-session');
 
 /* ************************
  * Constructs the nav HTML unordered list
@@ -99,17 +100,18 @@ Util.displayReviews = async function(inventory_id){
   let reviewData = await invModel.getReviews(inventory_id);
   console.log(`Reviews count: ${reviewData.length}`);
   let reviews
-  if(reviewData > 0) {
+  if(reviewData) {
     reviews = '<ul id="review-display">'
     reviewData.forEach(data => {
-      reviews += '<li>'
-      reviews += 'data.account_id' //'data.account_firstname + data.account_lastname' 
-      reviews +='<li>' + data.review_text + '<li>'
-      reviews +='<li>' + data.review_date + '<li>' // time stamp
+      console.log("iterating through reviews")
+      console.log(`review_text: ${data.review_text}`)
+      reviews += '<li>' + data.account_firstname[0] + data.account_lastname + '</li>' // data.account_id
+      reviews +='<li>' + data.review_text + '</li>'
+      reviews +='<li>' + data.review_date + '</li>' // time stamp
     })
-    reviews += '<ul>'
+    reviews += '</ul>'
   } else {
-    reviews += '<p class="notice">Be the first to leave a review!<p>'
+    reviews += '<p class="notice">Be the first to leave a review!</p>'
   }
   return reviews
 }
@@ -122,18 +124,22 @@ Util.displayAccountReviews = async function(account_id){
   let reviewData = await acctModel.getAccountReviews(account_id);
   console.log(`Reviews count: ${reviewData.length}`);
   let reviews
- {
+  if(reviewData) {
     reviews = '<ul id="review-display">'
     reviewData.forEach(data => {
-      reviews += '<li>' + data.account_id + '<li>' //'data.account_firstname + data.account_lastname' 
-      reviews +='<li>' + data.review_text + '<li>'
-      reviews +='<li>' + data.review_date + '<li>' // time stamp
+      console.log("iterating through reviews")
+      console.log(`review_text: ${data.review_text}`)
+      reviews += '<li>' + data.account_firstname[0] + data.account_lastname + '</li>' // data.account_id
+      reviews +='<li>' + data.review_text + '</li>'
+      reviews +='<li>' + data.review_date + '</li>' // time stamp
     })
-    reviews += '<ul>'
-  } 
-  return reviews
+    reviews += '</ul>'
+  } else {
+      reviews += '<p>You have not written any reviews</p>'  
+    }
+    
+    return reviews
 }
-
 
 /* *******************
  * Middleware to check token validity

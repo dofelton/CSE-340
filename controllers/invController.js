@@ -25,6 +25,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
  * ************************** */
 invCont.buildByIndividual = async function (req, res, next) {
   const inventory_id = req.params.inventoryId;
+  req.session.inv_id = inventory_id;
   const inv_id = inventory_id
   const data = await invModel.getInventoryDetailsByInvId(inventory_id);
   const item = await utilities.buildIndividualItem(data[0]);
@@ -312,6 +313,7 @@ invCont.buildManagementView = async function (req, res, next) {
  *****************************/
 invCont.buildWriteReview = async function (req, res, next) {
   let nav = await utilities.getNav()
+  console.log(`session inv_id is: ${req.session.inv_id}`)
   let { inv_id } = req.body
   console.log(`build review inv id: ${inv_id}`)
   res.render("./inventory/write-review", {
@@ -326,25 +328,13 @@ invCont.buildWriteReview = async function (req, res, next) {
  * process write review 
  *****************************/
 invCont.writeReview = async function (req, res, next) {
-  let { review_text, inv_id } = req.body
+  let { review_text } = req.body
   const account_id = res.locals.accountData.account_id
-  console.log(`res.local.account_id: ${account_id}, ${inv_id}, ${review_text}`)
+  let inv_id = req.session.inv_id;
   const review = await invModel.addReview(review_text, inv_id, account_id)
   req.flash("notice", `The review has been posted.`)
   res.redirect("/")
-  
 }
 
 module.exports = invCont;
 
-
-// let nav = await utilities.getNav()
-//   const data = await invModel.getInventoryDetailsByInvId(inv_id);
-//   const item = await utilities.buildIndividualItem(data[0]);
-//   res.render(`./inventory/detail/${inv_id}`,{
-//     title: "Detail view",
-//     nav,
-//     item,
-//     reviews,
-//     errors: null,
-//     })
